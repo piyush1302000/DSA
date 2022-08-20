@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+        if(nums.size() < 1 || nums.size() < 2)
+        return vector<vector<int>>();
+        
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        set<vector<int>> s;
+        vector<int> temp;
+        
+        for(int i = 0; i < n; i++){
+            int lo = i+1;
+            int hi = n-1;
+            while(lo < hi){
+                int current = nums[i] + nums[lo] + nums[hi];
+                if(current == 0){
+                    temp.push_back(nums[i]);
+                    temp.push_back(nums[lo]);
+                    temp.push_back(nums[hi]);
+                    s.insert(temp);
+                    temp.clear();
+                }
+                if(current < 0)
+                    lo++;
+                else
+                    hi--;
+            }
+        }
+         vector<vector<int>> ans(s.begin(), s.end());
+        return ans;
+    }
+};

@@ -1,0 +1,17 @@
+string reverseWords(string s) {
+    string ans="";
+    string temp="";
+        
+    for(auto i:s){
+   if(i!=' ')temp+=i;
+        if(i==' '&&temp!=""){
+            ans=temp+ans;
+            ans=" "+ans;
+            temp="";
+        }
+    }
+    ans=temp+ans;
+   if(ans[0]==' ')ans.erase(0,1);//remove first char
+    return ans;
+
+    }

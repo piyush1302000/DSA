@@ -1,0 +1,21 @@
+int firstUniqChar(string s) {
+        unordered_map<char, int> count;
+        queue<char> q;
+        for(int i = 0; i < s.size(); i++){
+            char ch = s[i];
+            count[ch]++;
+            q.push(ch);
+        }
+        int j = 0;
+        while(!q.empty()){
+            if(count[q.front()] > 1){
+                q.pop();
+                j++;
+            }
+            else
+            {
+                return j;
+            }
+        }
+        return -1;
+    }

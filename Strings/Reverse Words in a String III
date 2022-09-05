@@ -1,0 +1,30 @@
+string reversestring(string f)
+    {
+        int l=0;
+        int r=f.length()-1;
+        while(l<r)
+        {
+            swap(f[l],f[r]);
+            l++;
+            r--;
+        }
+        return f;
+    }
+    string reverseWords(string s) {
+        string ans="";
+        string t="";
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]==' ')
+            {
+               ans+= reversestring(t)+" ";
+                t="";
+                
+            }
+            else{
+                t+=s[i];
+            }
+        }
+  ans+=reversestring(t);
+        return ans;
+    }

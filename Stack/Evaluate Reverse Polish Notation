@@ -1,0 +1,34 @@
+int evalRPN(vector<string>& tokens) {
+        stack<string> s;
+        int c;
+        for(int i = 0; i < tokens.size(); i++){
+            if(tokens[i] != "+" && tokens[i] != "-" && tokens[i] != "*" && tokens[i] != "/"){
+                s.push(tokens[i]);
+            }
+            else{
+               int b = stoi(s.top());
+                s.pop();
+               int a = stoi(s.top());
+                s.pop(); 
+                string str = tokens[i];
+                char *exp = str.data();
+                switch(int(exp[0])){
+                    case 43:
+                        c = a + b;
+                        break;
+                    case 45:
+                        c = a - b;
+                        break;
+                    case 42:
+                        c = a * b;
+                        break;
+                    case 47:
+                        c = a / b;
+                        break;
+                }
+                s.push(to_string(c));
+            }
+        }
+        int ans = stoi(s.top());
+        return ans;
+    }

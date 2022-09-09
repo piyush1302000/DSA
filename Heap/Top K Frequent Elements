@@ -1,0 +1,33 @@
+struct node{
+        int no;
+        int freq;
+        node(int a, int b){
+            no = a;
+            freq = b;
+        }
+    };
+    
+    struct compare{
+        bool operator()(node const &a, node const &b){
+            return a.freq < b.freq;
+        }
+    };
+    
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        unordered_map<int, int> m;
+        // step 1: store frequency of all elements in map
+        for(int ele: nums)
+            m[ele]++;
+        // step 2: build a heap
+        priority_queue<node, vector<node>, compare> heap;
+        for(auto it: m)
+            heap.push(node(it.first, it.second));
+        vector<int> ans;
+        // step 3: pop top k elements and store the ans
+        while(k--){
+            node temp = heap.top();
+            heap.pop();
+            ans.push_back(temp.no);
+        }
+        return ans;
+    }

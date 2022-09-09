@@ -1,0 +1,35 @@
+vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+		deque<int> store;
+        vector<int> ans;
+		for(int i = 0; i < k; ++i){
+			while(!store.empty() && nums[store.back()] < nums[i]){
+				store.pop_back();
+			}  
+			store.push_back(i);
+		}
+
+		ans.push_back(nums[store.front()]);
+
+		for(int i = 1; i <= nums.size() - k; ++i){
+			clear(nums, store, i);
+			add(nums, store, i+k-1);
+			ans.push_back(nums[store.front()]);
+		}
+
+		return ans;
+	}
+
+	// remove the invalid index
+	void clear(vector<int>& nums, deque<int>& input, int start){
+		while(!input.empty() && input.front() < start){
+			input.pop_front();
+		}
+	}
+
+	// add index end to the deque
+	void add(vector<int>& nums, deque<int>& input, int end){
+		while(!input.empty() && nums[input.back()] < nums[end]){
+			input.pop_back();
+		}
+		input.push_back(end);
+	}

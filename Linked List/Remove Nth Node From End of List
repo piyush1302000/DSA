@@ -1,0 +1,48 @@
+ListNode* reverse(ListNode* head){
+        if(head == NULL || head -> next == NULL)
+            return head;
+        ListNode* curr = head;
+        ListNode* prev = NULL;
+        ListNode* forward = NULL;
+        while(curr != NULL)
+        {
+            forward = curr -> next;
+            curr -> next = prev;
+            prev = curr;
+            curr = forward;
+        }
+        return prev;
+    }
+    
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if(head -> next == NULL && n == 1)
+            return NULL;
+        ListNode* ans;
+        ListNode* curr = reverse(head);
+        ListNode* head1 = curr;
+        ListNode* prev = NULL;
+        ListNode* forward = NULL;
+        int cnt = 1;
+        while(cnt != n && curr != NULL)
+        {
+            prev = curr;
+            curr = curr -> next;
+            forward = curr -> next;
+            cnt++;        
+        }
+        if(prev != NULL){
+        prev -> next = forward;
+        curr -> next = NULL;
+        delete curr;
+        }
+        else{
+                forward = curr -> next;
+                curr -> next = NULL;
+                delete curr;
+        }
+        if(n == 1)
+            ans = reverse(forward);
+        else
+            ans = reverse(head1);
+        return ans;
+    }

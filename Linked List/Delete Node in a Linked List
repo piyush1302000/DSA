@@ -1,0 +1,5 @@
+void deleteNode(ListNode* node) {
+        ListNode* forward = node -> next;
+        node -> val = forward -> val;
+        node -> next = forward -> next;
+    }

@@ -1,0 +1,20 @@
+int candy(vector<int>& ratings) {
+        int n = ratings.size();
+        vector<int> leftToRight(n, 1);
+        vector<int> rightToLeft(n, 1);
+
+        for(int i = 1; i < n; i++){
+            if(ratings[i] > ratings[i-1])
+                leftToRight[i] = leftToRight[i-1] + 1;
+        }
+        for(int j = n-2; j >= 0; j--){
+            if(ratings[j] > ratings[j+1])
+                rightToLeft[j] = rightToLeft[j+1] + 1;
+        }
+        
+        int sum = 0;
+        for(int k = 0; k < n; k++){
+            sum += max(leftToRight[k], rightToLeft[k]);
+        }
+        return sum;
+    }

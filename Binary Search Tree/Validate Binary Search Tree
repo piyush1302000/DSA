@@ -1,0 +1,23 @@
+   bool isValidBST(TreeNode* root) 
+    {
+        if(!root)
+            return true;
+       
+        return validate(root, NULL, NULL);
+    }
+    
+    
+    bool validate(TreeNode* root, TreeNode* left, TreeNode* right)
+    {
+        if(!root)
+            return true;
+        
+        if(left && left->val >= root->val)
+            return false;
+        
+        if(right && right->val <= root->val)
+            return false;
+        
+        return validate(root->left, left, root) && validate(root->right, root, right);
+        
+    }

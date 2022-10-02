@@ -1,0 +1,24 @@
+void inorder(TreeNode* root, vector<int> &in){
+        if(root == NULL)
+            return;
+        inorder(root -> left, in);
+        in.push_back(root -> val);
+        inorder(root -> right, in);
+    }
+    
+    bool findTarget(TreeNode* root, int k) {
+        vector<int> inorderVal;
+        inorder(root, inorderVal);
+        int s = 0;
+        int e = inorderVal.size() - 1;
+        while(s < e){
+            int sum = inorderVal[s] + inorderVal[e];
+            if(sum == k)
+                return true;
+            if(sum > k)
+                e--;
+            else
+                s++;
+        }
+        return false;
+    }

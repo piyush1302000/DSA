@@ -1,0 +1,32 @@
+void solve(TreeNode* root, vector<int> &ans2, vector<int> ans){
+        int value = 0;
+        // base case
+        if(root == NULL)
+            return;
+        ans.push_back(root -> val);
+        if(root -> left == NULL && root -> right == NULL){
+            for(int i = 0; i < ans.size(); i++){
+                value = value*10 + ans[i];
+            }
+            ans2.push_back(value);
+            ans.pop_back();
+            return;
+        }
+        if(root -> left){
+            solve(root -> left, ans2, ans);
+        }
+        if(root -> right){
+            solve(root -> right, ans2, ans);
+        }
+    }
+    
+    int sumNumbers(TreeNode* root) {
+        vector<int> ans;
+        vector<int> ans2;
+        int sum = 0;
+        solve(root, ans2, ans);
+        for(int i = 0; i < ans2.size(); i++){
+            sum = sum + ans2[i];
+        }
+        return sum;
+    }

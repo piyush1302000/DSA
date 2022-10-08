@@ -1,0 +1,16 @@
+void rightView(TreeNode* root, vector<int> &ans, int level){
+        // base case
+        if(root == NULL)
+            return;
+        // we entered a new level
+        if(level == ans.size())
+            ans.push_back(root -> val);
+        
+        rightView(root -> right, ans, level+1);
+        rightView(root -> left, ans, level+1);
+    }
+    
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> ans;
+        rightView(root, ans, 0);
+        return ans;

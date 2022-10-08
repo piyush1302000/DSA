@@ -1,0 +1,28 @@
+void solve(TreeNode* root, int &sum, bool left){
+        // base case
+        if(root == NULL)
+            return;
+        
+        if(root -> left == NULL && root -> right == NULL && left == true){
+            sum = sum + root -> val;
+            return;
+        }
+        
+       if(root -> left){
+           left = true;
+           solve(root -> left, sum, left);
+       }
+        if(root -> right){
+           left = false;
+           solve(root -> right, sum, left);
+       }
+    }
+    
+    int sumOfLeftLeaves(TreeNode* root) {
+        if(root == NULL)
+            return 0;
+        int sum = 0;
+        bool left;
+        solve(root, sum, left);
+        return sum;
+    }

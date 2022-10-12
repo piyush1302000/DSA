@@ -1,0 +1,15 @@
+int arrayNesting(vector<int>& nums) {
+        vector<bool> visited(nums.size(), false);
+        int result = INT_MIN;
+        for(int i = 0; i < nums.size(); i++){
+            int index = i;
+            int count = 0;
+            while(!visited[index]){
+                visited[index] = true;
+                index = nums[index];
+                count++;
+            }
+            result = max(result, count);
+        }
+        return result;
+    }
